@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.dev;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ColleguesApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ColleguesApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ColleguesApiApplication.class, args);
+    }
 
 }
