@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.entite.Collegue;
+import com.dev.exception.CollegueInvalideException;
 import com.dev.exception.CollegueNonTrouveException;
 import com.dev.service.CollegueService;
 import com.dev.util.Constantes;
@@ -37,6 +39,12 @@ public class CollegueController {
     public Collegue rechercherCollegue(@PathVariable String matricule) throws CollegueNonTrouveException {
 
         return collegueService.rechercherParMatricule(matricule);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Collegue ajouterCollegue(@RequestBody Collegue collegue) throws CollegueInvalideException {
+
+        return collegueService.ajouterUnCollegue(collegue);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.dev.service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import com.dev.entite.Collegue;
+import com.dev.exception.CollegueInvalideException;
 import com.dev.exception.CollegueNonTrouveException;
 
 public class CollegueService {
@@ -49,6 +51,18 @@ public class CollegueService {
             return data.get(matriculeRecherche);
 
         throw new CollegueNonTrouveException();
+    }
+
+    public Collegue ajouterUnCollegue(Collegue collegue) throws CollegueInvalideException {
+        if ((collegue.getNom().trim().length() >= 2) && (collegue.getPrenoms().trim().length() >= 2)
+                && (collegue.getEmail().trim().length() >= 3) && (collegue.getEmail().contains("@"))
+                && (Period.between(collegue.getDateDeNaissance(), LocalDate.now()).getYears() >= 18)) {
+            collegue.setMatricule(UUID.randomUUID().toString());
+            data.put(collegue.getMatricule(), collegue);
+            return collegue;
+        }
+
+        throw new CollegueInvalideException();
     }
 
 }
