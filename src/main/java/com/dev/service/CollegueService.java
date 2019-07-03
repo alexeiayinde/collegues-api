@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import com.dev.entite.Collegue;
+import com.dev.exception.CollegueNonTrouveException;
 
 public class CollegueService {
 
@@ -40,6 +41,14 @@ public class CollegueService {
                 listeCollegues.add(element.getValue());
         }
         return listeCollegues;
+    }
+
+    public Collegue rechercherParMatricule(String matriculeRecherche) throws CollegueNonTrouveException {
+
+        if (data.get(matriculeRecherche) != null)
+            return data.get(matriculeRecherche);
+
+        throw new CollegueNonTrouveException();
     }
 
 }
