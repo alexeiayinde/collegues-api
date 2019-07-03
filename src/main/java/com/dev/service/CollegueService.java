@@ -15,12 +15,21 @@ public class CollegueService {
     private Map<String, Collegue> data = new HashMap<>();
 
     public CollegueService() {
-        data.put("Ayinde", new Collegue(UUID.randomUUID().toString(), "Ayinde", "Alexei", "alexei.ayinde@DTA.com",
+        String matricule = UUID.randomUUID().toString();
+        data.put(matricule, new Collegue(matricule, "Ayinde", "Alexei", "alexei.ayinde@DTA.com",
                 LocalDate.of(2000, 10, 1), "images/photoDefaut.jpg"));
-        data.put("Chauvin", new Collegue(UUID.randomUUID().toString(), "Chauvin", "Adrien", "adrien.chauvin@DTA.com",
+        matricule = UUID.randomUUID().toString();
+        data.put(matricule, new Collegue(matricule, "Chauvin", "Adrien", "adrien.chauvin@DTA.com",
                 LocalDate.of(1999, 06, 10), "images/photoDefaut.jpg"));
-        data.put("Odet", new Collegue(UUID.randomUUID().toString(), "Odet", "Rossi", "rossi.odet@DTA.com",
-                LocalDate.of(1998, 3, 18), "images/photoDefaut.jpg"));
+        matricule = UUID.randomUUID().toString();
+        data.put(matricule, new Collegue(matricule, "Oddet", "Rossi", "rossi.odet@DTA.com", LocalDate.of(1998, 3, 18),
+                "images/photoDefaut.jpg"));
+        matricule = UUID.randomUUID().toString();
+        data.put(matricule, new Collegue(matricule, "Ayinde", "Diana", "diana.ayinde@DTA.com",
+                LocalDate.of(1996, 05, 19), "images/photoDefaut.jpg"));
+        matricule = UUID.randomUUID().toString();
+        data.put(matricule, new Collegue(matricule, "Ayinde", "Anna", "anna.ayinde@DTA.com", LocalDate.of(1956, 03, 5),
+                "images/photoDefaut.jpg"));
     }
 
     public List<Collegue> rechercherParNom(String nomRecherche) {
