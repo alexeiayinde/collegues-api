@@ -36,7 +36,7 @@ public class CollegueController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{matricule}")
-    public Collegue rechercherCollegue(@PathVariable String matricule) throws CollegueNonTrouveException {
+    public Collegue rechercherCollegueParMatricule(@PathVariable String matricule) throws CollegueNonTrouveException {
 
         return collegueService.rechercherParMatricule(matricule);
     }
@@ -45,6 +45,19 @@ public class CollegueController {
     public Collegue ajouterCollegue(@RequestBody Collegue collegue) throws CollegueInvalideException {
 
         return collegueService.ajouterUnCollegue(collegue);
+    }
+
+    @RequestMapping(method = RequestMethod.PATCH, path = "/{matricule}")
+    public Collegue modifierCollegue(@PathVariable String matricule, @RequestBody Collegue collegue)
+            throws CollegueNonTrouveException, CollegueInvalideException {
+
+        if (collegue.getEmail() != null && !collegue.getEmail().isEmpty())
+            return collegueService.modifierEmail(matricule, collegue.getEmail());
+
+        if (collegue.getPhotoUrl() != null && !collegue.getPhotoUrl().isEmpty())
+            return collegueService.modifierPhotoUrl(matricule, collegue.getPhotoUrl());
+
+        return null;
     }
 
 }

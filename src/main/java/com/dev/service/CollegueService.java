@@ -65,4 +65,30 @@ public class CollegueService {
         throw new CollegueInvalideException();
     }
 
+    public Collegue modifierEmail(String matricule, String email)
+            throws CollegueNonTrouveException, CollegueInvalideException {
+
+        Collegue collegue = rechercherParMatricule(matricule);
+
+        if (email.trim().length() >= 3 && email.contains("@")) {
+            collegue.setEmail(email);
+            return collegue;
+        }
+
+        throw new CollegueInvalideException("email");
+    }
+
+    public Collegue modifierPhotoUrl(String matricule, String photoUrl)
+            throws CollegueNonTrouveException, CollegueInvalideException {
+
+        Collegue collegue = rechercherParMatricule(matricule);
+
+        if (photoUrl.startsWith("http")) {
+            collegue.setPhotoUrl(photoUrl);
+            return collegue;
+        }
+
+        throw new CollegueInvalideException("photoUrl");
+    }
+
 }

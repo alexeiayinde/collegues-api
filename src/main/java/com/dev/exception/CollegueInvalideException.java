@@ -6,4 +6,8 @@ public class CollegueInvalideException extends Exception {
         super();
     }
 
+    public CollegueInvalideException(String str) {
+        super("Veuillez saisir de nouveau le paramètre suivant : " + str);
+    }
+
 }
