@@ -62,7 +62,7 @@ public class CollegueService {
             return collegue;
         }
 
-        throw new CollegueInvalideException();
+        throw new CollegueInvalideException("Veuillez saisir un collègue valide");
     }
 
     public Collegue modifierEmail(String matricule, String email)
@@ -75,7 +75,7 @@ public class CollegueService {
             return collegue;
         }
 
-        throw new CollegueInvalideException("email");
+        throw new CollegueInvalideException("Veuillez saisir de nouveau le paramètre suivant : email");
     }
 
     public Collegue modifierPhotoUrl(String matricule, String photoUrl)
@@ -88,7 +88,7 @@ public class CollegueService {
             return collegue;
         }
 
-        throw new CollegueInvalideException("photoUrl");
+        throw new CollegueInvalideException("Veuillez saisir de nouveau le paramètre suivant : photoUrl");
     }
 
 }

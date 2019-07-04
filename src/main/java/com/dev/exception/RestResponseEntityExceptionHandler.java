@@ -17,8 +17,7 @@ public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = CollegueInvalideException.class)
     protected ResponseEntity<Object> handleConflict(CollegueInvalideException ex, WebRequest request) {
-        String bodyOfResponse = "Collègue invalide !";
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bodyOfResponse);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Collegue invalide ! " + ex.getMessage());
     }
 
 }
