@@ -6,20 +6,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.dev.entite.Collegue;
 import com.dev.exception.CollegueInvalideException;
-import com.dev.exception.CollegueNonTrouveException;
-import com.dev.util.Constantes;
 
-class CollegueServiceTest {
+public class CollegueServiceTest {
 
-    CollegueService collegueService = Constantes.COLLEGUE_SERVICE;
+    private CollegueService collegueService;
     Collegue collegue;
 
+    @BeforeEach
+    public void setUp() {
+        this.collegueService = new CollegueService();
+    }
+
     @Test
-    void testNomCollegue() throws CollegueInvalideException {
+    public void testNomCollegue() {
         // test cas nombre caractères pas suffisant
         collegue = new Collegue("Test", "a", "alex", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
         assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
@@ -33,7 +37,7 @@ class CollegueServiceTest {
     }
 
     @Test
-    void testPrenomCollegue() throws CollegueInvalideException {
+    public void testPrenomCollegue() {
         // test cas nombre caractères pas suffisant
         collegue = new Collegue("Test", "ayinde", "a", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
         assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
@@ -47,7 +51,7 @@ class CollegueServiceTest {
     }
 
     @Test
-    void testEmailCollegue() throws CollegueInvalideException {
+    public void testEmailCollegue() {
         // test cas nombre caractères pas suffisant
         collegue = new Collegue("Test", "ayinde", "alex", "@", LocalDate.of(1900, 01, 01), "test");
         assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
@@ -66,7 +70,7 @@ class CollegueServiceTest {
     }
 
     @Test
-    void testDateDeNaissanceCollegue() throws CollegueInvalideException {
+    public void testDateDeNaissanceCollegue() {
         // test cas age < 18
         collegue = new Collegue("Test", "ayinde", "alex", "alex@DTA.com", LocalDate.of(2018, 01, 01), "test");
         assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
@@ -77,7 +81,7 @@ class CollegueServiceTest {
     }
 
     @Test
-    void testModifierEmail() throws CollegueInvalideException, CollegueNonTrouveException {
+    public void testModifierEmail() {
 
         List<Collegue> matricules = collegueService.rechercherParNom("Chauvin");
 
@@ -99,7 +103,7 @@ class CollegueServiceTest {
     }
 
     @Test
-    void testModifierPhotoUrl() throws CollegueNonTrouveException, CollegueInvalideException {
+    public void testModifierPhotoUrl() {
 
         List<Collegue> matricules = collegueService.rechercherParNom("Chauvin");
 

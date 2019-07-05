@@ -29,7 +29,7 @@ public class Collegue {
     }
 
     public void setMatricule(String matricule) {
-        this.matricule = matricule;
+        this.matricule = matricule.trim();
     }
 
     public String getNom() {
@@ -37,7 +37,7 @@ public class Collegue {
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom = nom.trim();
     }
 
     public String getPrenoms() {
@@ -45,7 +45,7 @@ public class Collegue {
     }
 
     public void setPrenoms(String prenoms) {
-        this.prenoms = prenoms;
+        this.prenoms = prenoms.trim();
     }
 
     public String getEmail() {
@@ -53,7 +53,7 @@ public class Collegue {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.trim();
     }
 
     public LocalDate getDateDeNaissance() {

@@ -1,6 +1,6 @@
 package com.dev.exception;
 
-public class CollegueNonTrouveException extends Exception {
+public class CollegueNonTrouveException extends RuntimeException {
 
     public CollegueNonTrouveException() {
         super();

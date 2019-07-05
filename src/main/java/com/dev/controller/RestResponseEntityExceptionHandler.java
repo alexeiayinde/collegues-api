@@ -1,10 +1,13 @@
-package com.dev.exception;
+package com.dev.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+
+import com.dev.exception.CollegueInvalideException;
+import com.dev.exception.CollegueNonTrouveException;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler {
@@ -17,7 +20,7 @@ public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = CollegueInvalideException.class)
     protected ResponseEntity<Object> handleConflict(CollegueInvalideException ex, WebRequest request) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Collegue invalide ! " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Collegue invalide ! " + ex.getMessage());
     }
 
 }
