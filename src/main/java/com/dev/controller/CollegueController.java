@@ -1,8 +1,10 @@
 package com.dev.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.entite.Collegue;
 import com.dev.service.CollegueService;
-import com.dev.util.Constantes;
 
 @RestController
 
 @RequestMapping(path = "/collegues")
 public class CollegueController {
 
-    private CollegueService collegueService = Constantes.COLLEGUE_SERVICE;
+    @Autowired
+    private CollegueService collegueService;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<String> rechercherCollegues(@RequestParam String nom) {
@@ -31,15 +33,15 @@ public class CollegueController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{matricule}")
-    public Collegue rechercherCollegueParMatricule(@PathVariable String matricule) {
+    public Optional<Collegue> rechercherCollegueParMatricule(@PathVariable String matricule) {
 
         return collegueService.rechercherParMatricule(matricule);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Collegue ajouterCollegue(@RequestBody Collegue collegue) {
+    public Collegue creerrCollegue(@RequestBody Collegue collegue) {
 
-        return collegueService.ajouterUnCollegue(collegue);
+        return collegueService.creerCollegue(collegue);
     }
 
     @RequestMapping(method = RequestMethod.PATCH, path = "/{matricule}")

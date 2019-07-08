@@ -26,58 +26,58 @@ public class CollegueServiceTest {
     public void testNomCollegue() {
         // test cas nombre caractères pas suffisant
         collegue = new Collegue("Test", "a", "alex", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         // test cas nombre caractères pas suffisant en raison d'espaces vides
         collegue = new Collegue("Test", "   ", "alex", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         collegue = new Collegue("Test", "aa", "alex", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertEquals(Collegue.class, collegueService.ajouterUnCollegue(collegue).getClass());
+        assertEquals(Collegue.class, collegueService.creerCollegue(collegue).getClass());
     }
 
     @Test
     public void testPrenomCollegue() {
         // test cas nombre caractères pas suffisant
         collegue = new Collegue("Test", "ayinde", "a", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         // test cas nombre caractères pas suffisant en raison d'espaces vides
         collegue = new Collegue("Test", "ayinde", "   ", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         collegue = new Collegue("Test", "ayinde", "alex", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertEquals(Collegue.class, collegueService.ajouterUnCollegue(collegue).getClass());
+        assertEquals(Collegue.class, collegueService.creerCollegue(collegue).getClass());
     }
 
     @Test
     public void testEmailCollegue() {
         // test cas nombre caractères pas suffisant
         collegue = new Collegue("Test", "ayinde", "alex", "@", LocalDate.of(1900, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         // test cas nombre caractères pas suffisant en raison d'espaces vides
         collegue = new Collegue("Test", "ayinde", "alex", "     @", LocalDate.of(1900, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         // test cas sans @
         collegue = new Collegue("Test", "ayinde", "alex", "alexatdta.com", LocalDate.of(1900, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         // test cas où email est correctement saisi
         collegue = new Collegue("Test", "ayinde", "alex", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertEquals(Collegue.class, collegueService.ajouterUnCollegue(collegue).getClass());
+        assertEquals(Collegue.class, collegueService.creerCollegue(collegue).getClass());
     }
 
     @Test
     public void testDateDeNaissanceCollegue() {
         // test cas age < 18
         collegue = new Collegue("Test", "ayinde", "alex", "alex@DTA.com", LocalDate.of(2018, 01, 01), "test");
-        assertThrows(CollegueInvalideException.class, () -> collegueService.ajouterUnCollegue(collegue));
+        assertThrows(CollegueInvalideException.class, () -> collegueService.creerCollegue(collegue));
 
         // test cas où date de naissance est correctement saisie
         collegue = new Collegue("Test", "ayinde", "alex", "alex@DTA.com", LocalDate.of(1900, 01, 01), "test");
-        assertEquals(Collegue.class, collegueService.ajouterUnCollegue(collegue).getClass());
+        assertEquals(Collegue.class, collegueService.creerCollegue(collegue).getClass());
     }
 
     @Test

@@ -2,13 +2,29 @@ package com.dev.entite;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "chocolatine")
 public class Collegue {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String matricule;
+    @Column
     private String nom;
+    @Column
     private String prenoms;
+    @Column
     private String email;
+    @Column
     private LocalDate dateDeNaissance;
+    @Column
     private String photoUrl;
 
     public Collegue() {
