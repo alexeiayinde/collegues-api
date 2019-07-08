@@ -23,6 +23,11 @@ public class CollegueController {
     @Autowired
     private CollegueService collegueService;
 
+    @RequestMapping(method = RequestMethod.GET, path = "/lister")
+    public List<Collegue> listerCollegues() {
+        return collegueService.listerCollegues();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public List<String> rechercherCollegues(@RequestParam String nom) {
 
@@ -39,7 +44,7 @@ public class CollegueController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Collegue creerrCollegue(@RequestBody Collegue collegue) {
+    public Collegue creerCollegue(@RequestBody Collegue collegue) {
 
         return collegueService.creerCollegue(collegue);
     }
