@@ -32,7 +32,7 @@ public class CollegueService {
     @PostConstruct
     public void init() {
         Collegue c1 = new Collegue(UUID.randomUUID().toString(), "Ayinde", "Alexei", "alexei.ayinde@dta.com", LocalDate.of(1987, 10, 01),
-                "url photo");
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/President_Barack_Obama.jpg/220px-President_Barack_Obama.jpg");
         collegueRepository.save(c1);
     }
 

@@ -19,10 +19,16 @@ public class ColleguesApiApplication {
         CollegueService collegueService = context.getBean(CollegueService.class);
 
         collegueService.creerCollegue(
-                new Collegue(UUID.randomUUID().toString(), "Ayinde", "Diana", "diana.ayinde@dta.com", LocalDate.of(1984, 05, 19), "test"));
+                new Collegue(UUID.randomUUID().toString(), "Ayinde", "Diana", "diana.ayinde@dta.com", LocalDate.of(1984, 05, 19),
+                        "https://randomuser.me/api/portraits/women/11.jpg"));
 
         collegueService.creerCollegue(
-                new Collegue(UUID.randomUUID().toString(), "Adrien", "Chauvin", "adrien.chauvine@dta.com", LocalDate.of(1990, 05, 19), "test"));
+                new Collegue(UUID.randomUUID().toString(), "Ayinde", "Liubov", "liubov.ayinde@dta.com", LocalDate.of(1960, 12, 01),
+                        "https://randomuser.me/api/portraits/women/0.jpg"));
+
+        collegueService.creerCollegue(
+                new Collegue(UUID.randomUUID().toString(), "Chauvin", "Adrien", "adrien.chauvine@dta.com", LocalDate.of(1990, 05, 19),
+                        "https://randomuser.me/api/portraits/men/85.jpg"));
 
     }
 
