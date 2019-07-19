@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.entite.Collegue;
+import com.dev.entite.PhotoDTO;
 import com.dev.service.CollegueService;
 
 @CrossOrigin
@@ -62,6 +63,11 @@ public class CollegueController {
             c = collegueService.modifierPhotoUrl(matricule, collegue.getPhotoUrl());
 
         return c;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/photos")
+    public List<PhotoDTO> rechercherPhotos() {
+        return collegueService.rechercherPhotos();
     }
 
 }

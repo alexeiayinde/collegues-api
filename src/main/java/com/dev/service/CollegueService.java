@@ -2,6 +2,7 @@ package com.dev.service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dev.entite.Collegue;
+import com.dev.entite.PhotoDTO;
 import com.dev.exception.CollegueInvalideException;
 import com.dev.exception.CollegueNonTrouveException;
 import com.dev.persistence.CollegueRepository;
@@ -91,6 +93,14 @@ public class CollegueService {
             return collegueRepository.save(c);
         }
         throw new CollegueInvalideException("Veuillez saisir de nouveau le paramètre suivant : photoUrl (doit commencer par 'http')");
+    }
+
+    public List<PhotoDTO> rechercherPhotos() {
+        List<PhotoDTO> listePhotos = new ArrayList<>();
+        for (Collegue collegue : collegueRepository.findAll()) {
+            listePhotos.add(new PhotoDTO(collegue.getMatricule(), collegue.getPhotoUrl()));
+        }
+        return listePhotos;
     }
 
 }
