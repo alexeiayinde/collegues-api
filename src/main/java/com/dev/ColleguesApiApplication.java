@@ -27,7 +27,7 @@ public class ColleguesApiApplication {
                         "https://randomuser.me/api/portraits/women/0.jpg"));
 
         collegueService.creerCollegue(
-                new Collegue(UUID.randomUUID().toString(), "Chauvin", "Adrien", "adrien.chauvine@dta.com", LocalDate.of(1990, 05, 19),
+                new Collegue(UUID.randomUUID().toString(), "Chauvin", "Adrien", "adrien.chauvin@dta.com", LocalDate.of(1990, 05, 19),
                         "https://randomuser.me/api/portraits/men/85.jpg"));
 
     }

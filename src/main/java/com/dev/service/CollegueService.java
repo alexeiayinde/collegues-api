@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.dev.entite.Collegue;
 import com.dev.exception.CollegueInvalideException;
+import com.dev.exception.CollegueNonTrouveException;
 import com.dev.persistence.CollegueRepository;
 
 @Service
@@ -49,34 +50,47 @@ public class CollegueService {
     }
 
     public Collegue creerCollegue(Collegue collegue) {
-        if (collegue.getNom().trim().length() >= TAILLE_NOM_MINIMUM
-                && collegue.getPrenoms().trim().length() >= TAILLE_PRENOM_MINIMUM
-                && collegue.getEmail().trim().length() >= TAILLE_EMAIL_MINIMUM
-                && collegue.getEmail().contains("@")
-                && Period.between(collegue.getDateDeNaissance(), LocalDate.now()).getYears() >= AGE_MINIMUM) {
-            collegue.setMatricule(UUID.randomUUID().toString());
-            return collegueRepository.save(collegue);
+
+        if (collegue.getNom().trim().length() < TAILLE_NOM_MINIMUM) {
+            throw new CollegueInvalideException("Nom invalide (min. " + TAILLE_NOM_MINIMUM + " caractères)");
         }
-        throw new CollegueInvalideException("Veuillez saisir un collègue valide");
+        if (collegue.getPrenoms().trim().length() < TAILLE_PRENOM_MINIMUM) {
+            throw new CollegueInvalideException("Prénom(s) invalide(s) (min. " + TAILLE_PRENOM_MINIMUM + "caractères)");
+        }
+        if (collegue.getEmail().trim().length() < TAILLE_EMAIL_MINIMUM) {
+            throw new CollegueInvalideException("Email invalide (min. " + TAILLE_EMAIL_MINIMUM + " caractères)");
+        }
+        if (!collegue.getEmail().contains("@")) {
+            throw new CollegueInvalideException("Email invalide (doit contenir le caractère '@')");
+        }
+        if (Period.between(collegue.getDateDeNaissance(), LocalDate.now()).getYears() < AGE_MINIMUM) {
+            throw new CollegueInvalideException("Date de naissance invalide (l'âge minimum est de " + AGE_MINIMUM + ")");
+        }
+        if (!collegue.getPhotoUrl().startsWith("http://") && !collegue.getPhotoUrl().startsWith("https://")) {
+            throw new CollegueInvalideException("L'URL de la photo invalide (doit commencer par 'http://' ou 'https://')");
+        }
+        collegue.setMatricule(UUID.randomUUID().toString());
+        return collegueRepository.save(collegue);
     }
 
     public Collegue modifierEmail(String matricule, String email) {
         Collegue c = rechercherParMatricule(matricule)
-                .orElseThrow(() -> new CollegueInvalideException("Veuillez saisir de nouveau le paramètre suivant : email"));
+                .orElseThrow(() -> new CollegueNonTrouveException());
         if (email.trim().length() >= TAILLE_EMAIL_MINIMUM && email.contains("@")) {
             c.setEmail(email);
+            return collegueRepository.save(c);
         }
-        return collegueRepository.save(c);
+        throw new CollegueInvalideException("Veuillez saisir de nouveau le paramètre suivant : email (doit contenir un caractère @)");
     }
 
     public Collegue modifierPhotoUrl(String matricule, String photoUrl) {
         Collegue c = rechercherParMatricule(matricule)
-                .orElseThrow(() -> new CollegueInvalideException("Veuillez saisir de nouveau le paramètre suivant : photoUrl"));
-
+                .orElseThrow(() -> new CollegueNonTrouveException());
         if (photoUrl.startsWith("http")) {
             c.setPhotoUrl(photoUrl);
+            return collegueRepository.save(c);
         }
-        return collegueRepository.save(c);
+        throw new CollegueInvalideException("Veuillez saisir de nouveau le paramètre suivant : photoUrl (doit commencer par 'http')");
     }
 
 }

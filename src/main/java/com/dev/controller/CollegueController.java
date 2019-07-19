@@ -53,13 +53,15 @@ public class CollegueController {
     @RequestMapping(method = RequestMethod.PATCH, path = "/{matricule}")
     public Collegue modifierCollegue(@PathVariable String matricule, @RequestBody Collegue collegue) {
 
+        Collegue c = new Collegue();
+
         if (collegue.getEmail() != null && !collegue.getEmail().isEmpty())
-            return collegueService.modifierEmail(matricule, collegue.getEmail());
+            c = collegueService.modifierEmail(matricule, collegue.getEmail());
 
         if (collegue.getPhotoUrl() != null && !collegue.getPhotoUrl().isEmpty())
-            return collegueService.modifierPhotoUrl(matricule, collegue.getPhotoUrl());
+            c = collegueService.modifierPhotoUrl(matricule, collegue.getPhotoUrl());
 
-        return null;
+        return c;
     }
 
 }
