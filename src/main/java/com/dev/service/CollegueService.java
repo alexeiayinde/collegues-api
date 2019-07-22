@@ -3,6 +3,7 @@ package com.dev.service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dev.entite.Collegue;
@@ -20,6 +22,9 @@ import com.dev.persistence.CollegueRepository;
 
 @Service
 public class CollegueService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private CollegueRepository collegueRepository;
@@ -35,8 +40,16 @@ public class CollegueService {
     @PostConstruct
     public void init() {
         Collegue c1 = new Collegue(UUID.randomUUID().toString(), "Ayinde", "Alexei", "alexei.ayinde@dta.com", LocalDate.of(1987, 10, 01),
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/President_Barack_Obama.jpg/220px-President_Barack_Obama.jpg");
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/President_Barack_Obama.jpg/220px-President_Barack_Obama.jpg", "alexei01",
+                passwordEncoder.encode("alexeipass"), Arrays.asList("ROLE_ADMIN", "ROLE_USER"));
         collegueRepository.save(c1);
+        collegueRepository.save(new Collegue(UUID.randomUUID().toString(), "Ayinde", "Diana", "diana.ayinde@dta.com",
+                LocalDate.of(1984, 05, 19),
+                "https://randomuser.me/api/portraits/women/11.jpg", "diana01", passwordEncoder.encode("dianapass"), Arrays.asList("ROLE_USER")));
+        collegueRepository.save(new Collegue(UUID.randomUUID().toString(), "Ayinde", "Liubov", "liubov.ayinde@dta.com", LocalDate.of(1960, 12, 01),
+                "https://randomuser.me/api/portraits/women/0.jpg", "liubov01", passwordEncoder.encode("liubovpass"), Arrays.asList("ROLE_USER")));
+        collegueRepository.save(new Collegue(UUID.randomUUID().toString(), "Chauvin", "Adrien", "adrien.chauvin@dta.com", LocalDate.of(1990, 05, 19),
+                "https://randomuser.me/api/portraits/men/85.jpg", "adrien01", passwordEncoder.encode("adrienpass"), Arrays.asList("ROLE_USER")));
     }
 
     public List<Collegue> listerCollegues() {
@@ -45,6 +58,10 @@ public class CollegueService {
 
     public List<Collegue> rechercherParNom(String nom) {
         return collegueRepository.findByNom(nom);
+    }
+
+    public Optional<Collegue> findByNomUtilisateur(String nom) {
+        return collegueRepository.findByNomUtilisateur(nom);
     }
 
     public Optional<Collegue> rechercherParMatricule(String matricule) {
@@ -72,7 +89,7 @@ public class CollegueService {
             throw new CollegueInvalideException("L'URL de la photo invalide (doit commencer par 'http://' ou 'https://')");
         }
         collegue.setMatricule(UUID.randomUUID().toString());
-        return collegueRepository.save(collegue);
+        return collegueRepository.save(collegue); // TODO crypter mdp
     }
 
     public Collegue modifierEmail(String matricule, String email) {

@@ -1,14 +1,18 @@
 package com.dev.entite;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "chocolatine")
+@Table(name = "collegue")
 public class Collegue {
 
     @Id
@@ -24,6 +28,13 @@ public class Collegue {
     @Column
     private String photoUrl;
 
+    @Column
+    private String nomUtilisateur;
+    @Column
+    private String motDePasse;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
     public Collegue() {
     }
 
@@ -35,6 +46,19 @@ public class Collegue {
         this.email = email;
         this.dateDeNaissance = dateDeNaissance;
         this.photoUrl = photoUrl;
+    }
+
+    public Collegue(String matricule, String nom, String prenoms, String email, LocalDate dateDeNaissance,
+            String photoUrl, String nomUtilisateur, String motDePasse, List<String> roles) {
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenoms = prenoms;
+        this.email = email;
+        this.dateDeNaissance = dateDeNaissance;
+        this.photoUrl = photoUrl;
+        this.nomUtilisateur = nomUtilisateur;
+        this.motDePasse = motDePasse;
+        this.roles = roles;
     }
 
     public String getMatricule() {
@@ -83,6 +107,30 @@ public class Collegue {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getNomUtilisateur() {
+        return nomUtilisateur;
+    }
+
+    public void setNomUtilisateur(String nomUtilisateur) {
+        this.nomUtilisateur = nomUtilisateur;
+    }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     @Override
